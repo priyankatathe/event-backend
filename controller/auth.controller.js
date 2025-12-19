@@ -146,8 +146,11 @@ exports.loginAdmin = asyncHandler(async (req, res) => {
             process.env.JWT_KEY, { expiresIn: "15d" })
         res.cookie("admin", token, {
             maxAge: 15 * 24 * 60 * 60 * 1000,
-            httpOnly: true
+            httpOnly: true,
+            secure: true, // https only
+            sameSite: "None" // cross-site cookie
         })
+
 
         res.json({
             message: "admin login success.",
