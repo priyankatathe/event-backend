@@ -172,8 +172,13 @@ exports.loginAdmin = asyncHandler(async (req, res) => {
 })
 
 exports.logoutAdmin = (req, res) => {
-    res.clearCookie("admin")
-    res.json({ message: "admin logout success" })
+  res.clearCookie("admin", {
+  httpOnly: true,
+  secure: true,       // HTTPS only
+  sameSite: "None"    // cross-site
+})
+res.json({ message: "admin logout success" })
+
 }
 
 exports.fetchAdmin = asyncHandler(async (req, res) => {
